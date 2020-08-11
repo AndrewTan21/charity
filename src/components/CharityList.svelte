@@ -1,7 +1,8 @@
 <script>
-    // export let charities = ['default charity 1'];
+	import {onMount, onDestroy, beforeUpdate, afterUpdate} from "svelte";
+    import Modal from "./Modal.svelte";
+
     export let charities;
-    import Modal from "../components/Modal.svelte";
     let isModalOpen = false;
 
     function calculateFundend(pledged, target) {
@@ -41,6 +42,9 @@
         display: block;
         background-color: rgba(0, 0, 0, 0.45);
     }
+    .pledged {
+        margin-right: 2em;
+    }
 </style>
 
 <!-- popularCauses section -->
@@ -54,9 +58,8 @@
             raise capital from anyone.</p>
         </div><!-- .xs-heading-title END -->
       </div><!-- .row end -->
-      {#if charities !== undefined}
-        {#each charities as charity}
-            <div class="row">
+        <div class="row">
+            {#each charities as charity}
                 <div class="col-lg-4 col-md-6">
                     {#if isModalOpen === true}
                     <Modal>
@@ -122,7 +125,7 @@
                     <a href="#" class="xs-post-title xs-mb-30">{charity.title}</a>
 
                     <ul class="xs-list-with-content">
-                        <li>{formatCurrency(charity.pledged)}<span>Pledged</span></li>
+                        <li class="pledged">{formatCurrency(charity.pledged)}<span>Pledged</span></li>
                         <li><span class="number-percentage-count number-percentage" data-value="90"
                             data-animation-duration="3500">{calculateFundend(charity.pledged, charity.target)}</span>% <span>Funded</span></li>
                         <li>{calculateDaysRemaining(charity.date_end)}<span>Days to go</span></li>
@@ -148,8 +151,7 @@
                     </div><!-- .xs-item-content END -->
                 </div><!-- .xs-popular-item END -->
                 </div>
-            </div><!-- .row end -->
-        {/each}
-      {/if}
+            {/each}
+        </div><!-- .row end -->
     </div><!-- .container end -->
 </section><!-- End popularCauses section -->
