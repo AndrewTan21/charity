@@ -19,10 +19,6 @@
             throw new Error(data);
         };
     };
-
-    onMount(async function() {
-        
-    });
 </script>
 
 <Header />
