@@ -112,8 +112,8 @@
                     <img src="{charity.thumbnail}" alt="">
 
                     <div class="xs-skill-bar">
-                        <div class="xs-skill-track" style="width:{calculateFundend(charity.pledged, charity.target)}%">
-                        <p in:fly="{{delay: 3500, x: -100}}" style="left: 100%">
+                        <div in:fade="{{delay: 2000}}" class="xs-skill-track" style="width:{calculateFundend(charity.pledged, charity.target)}%">
+                            <p in:fly="{{delay: 2000, x: -100}}" style="left: 100%">
                             <span class="number-percentage-count number-percentage" data-value="90"
                             data-animation-duration="3500">{calculateFundend(charity.pledged, charity.target)}</span>%</p>
                         </div>
