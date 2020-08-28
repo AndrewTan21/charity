@@ -6,11 +6,16 @@
   import Footer from "../components/Footer.svelte";
   import Loader from "../components/Loader.svelte";
 
-  let amount, name, email, agree = false;
+  let amount = 0, name, email, agree = false, contribute = 0;
+
+  $: if (charity) {
+    contribute = Math.floor((parseInt(amount) / $charity.target) * 100);
+  };
 
   getCharity($params.id); 
 
   async function handleForm(event) {
+    agree = false;
     const newData = await getCharity($params.id);
     newData.pledged = newData.pledged + parseInt(amount);
     try {
@@ -99,8 +104,9 @@
                 <p class="small">To learn more about make donate charity
                   with us visit our "<span class="color-green">Contact
                     us</span>" site. By calling <span class=
-                    "color-green">+44(0) 800 883 8450</span>.</p><span class=
-                    "xs-separetor v2"></span>
+                    "color-green">+44(0) 800 883 8450</span>.</p>
+                    <h5>Your donation will be contributing <strong>{contribute}%</strong> of total current donation.</h5>
+                    <span class="xs-separetor v2"></span>
               </div><!-- .xs-heading end -->
               <form action="#" on:submit|preventDefault="{handleForm}" method="post" id="xs-donation-form" class=
               "xs-donation-form" name="xs-donation-form">
